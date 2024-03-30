@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>컨트롤러에서 타임리프 th:text 속성 사용하기 - 변수 빈값 체크하기</title>
+</head>
+<body>
+
+<h1 th:text=" ${num}  + '단 출력하기'"> num 출력</h1>
+<h1 th:utext="${rst}"> 결과값 출력 </h1>
+<!--
+  html태그가 포함된 내용을 출력할 때는 th:utext 사용하여 출력
+  unescaped text
+-->
+
+
+</body>
+</html>

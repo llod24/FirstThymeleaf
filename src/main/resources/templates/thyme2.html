@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>컨트롤러에서 타임리프 th:text 속성 사용하기 - 변수 빈값 체크하기</title>
+</head>
+<body>
+    <div th:with="firstVal = ${''}, secondVal = ${''}">
+
+        <h1 th:text="${firstVal == '' ? '빈값입니다': firstVal }"> thymeleaf test cache? </h1>
+        <h1 th:if=" ${firstVal == ''}" th:text = '기본값'></h1>
+    </div>
+
+
+</body>
+</html>

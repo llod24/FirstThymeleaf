@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>form 값 주고 받기</title>
+</head>
+<body>
+
+<form action="/thymeleaf9" method="post">
+    <input type ="input" name="data1">
+    <input type="button" value ="전송">
+</form>
+<h1 th:text=" ${msg}"> num 출력</h1>
+
+</body>
+</html>

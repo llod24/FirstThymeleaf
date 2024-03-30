@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>다양한 타임리프 메소드</title>
+</head>
+<body>
+
+<h1 th:text="'전달된 값 : ' + ${msg}"></h1>
+
+<!--#strings.equals(a,b) a와 b가 같은 문자열인지 비교, 같으면 true 반환 다르면 false -->
+<!-- true나 false가 출력-->
+<h1 th:text="${#strings.equals(msg, 'hello World')}"> </h1>
+
+<!--th:if 조건이 참이면 태그가 렌더링 -->
+<h1 th:if="${#strings.equals(msg, 'helloWorld')}" style="color:red">if 사용시 조건이 참이면 이 문장이 보여요</h1>
+
+<!--#strings.isEmpty(a) 비었으면 true-->
+<!--#strings.contains(a, b) 전달된 변수 a에 b 문자열이 포함되었는지 체크 포함되었으면 true 아니면 false-->
+
+<h1 th:text="${#strings.contains(msg, 'korea')}">test</h1>
+
+<!--th:block 기존에는 태그 안에 th를 넣어사용하였는데 th:block은 태그 역할을 한다 태그는 아니므로 렌더링 되지는 않는다-->
+
+
+</body>
+</html>
