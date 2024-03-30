@@ -22,6 +22,17 @@
 
 <!--th:block 기존에는 태그 안에 th를 넣어사용하였는데 th:block은 태그 역할을 한다 태그는 아니므로 렌더링 되지는 않는다-->
 
+<th:block th:if="${#strings.isEmpty(msg)} "> test </th:block>
+
+<!--th:with 사용해보기-->
+<th:block th:with="msgValue = ${#strings.isEmpty(msg)}">
+    <h1 th:text="'msg value값은' + ${msgValue}"></h1>
+
+    <th:block th:if="${!msgValue} and ${msg}">
+        <button> button</button>
+    </th:block>
+
+</th:block>
 
 </body>
 </html>
