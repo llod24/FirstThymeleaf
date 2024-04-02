@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class HelloController {
 
@@ -152,6 +154,25 @@ public class HelloController {
 
     }
 
+    @GetMapping(value ="/thymeleaf13")
+    public ModelAndView checkBox(ModelAndView mav){
+        mav.addObject("msg", "어떤 메일을 사용하시나요?");
+        mav.setViewName("thyme13");
+
+        return mav;
+    }
+
+    @PostMapping(value ="/thymeleaf13")
+    public ModelAndView getCheckBoxList(@RequestParam(value="email")List<String> emailItem, ModelAndView mav){
+
+        List<String> emailList = emailItem;
+
+        mav.addObject("emailList", emailList);
+        mav.setViewName("thyme13");
+
+        return mav;
+
+    }
 
 
 
