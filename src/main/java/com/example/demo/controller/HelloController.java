@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -163,7 +164,7 @@ public class HelloController {
     }
 
     @PostMapping(value ="/thymeleaf13")
-    public ModelAndView getCheckBoxList(@RequestParam(value="email")List<String> emailItem, ModelAndView mav){
+    public ModelAndView getCheckBoxList(@RequestParam(value="email", required = false)List<String> emailItem , ModelAndView mav){
 
         List<String> emailList = emailItem;
 
@@ -172,6 +173,43 @@ public class HelloController {
 
         return mav;
 
+    }
+
+    @GetMapping(value ="/thymeleaf14")
+    public ModelAndView diverseMultiFormPage(ModelAndView mav){
+
+        mav.addObject("msg", "다양한 폼 값을 선택해주세요");
+        mav.setViewName("thyme14");
+
+        return mav;
+    }
+
+
+    @PostMapping(value ="/thymeleaf14")
+    public ModelAndView diverseMultiFormSend(@RequestParam(value = "email", required = false)List<String> emailItems,
+                                             @RequestParam(value = "gender", required = false)String gender,
+                                             @RequestParam(value = "age", required = false)String age, ModelAndView mav){
+
+
+//      사용자가 선택한 item
+        List<String> emailList = emailItems;
+//      view페이지에 체크박스 항목 전달하기 위한 리스트
+        List<String> checkItems = new ArrayList<String>();
+        checkItems.add("gmail");
+        checkItems.add("kakao");
+        checkItems.add("hanmail");
+        checkItems.add("naver");
+        mav.addObject("msg", "다양한 폼 값을 선택해주세요");
+        mav.addObject("emailList", emailList);
+        mav.addObject("checkItems", checkItems);
+        mav.addObject("gender", gender);
+        mav.addObject("age", age);
+        mav.setViewName("thyme14");
+
+//      console
+
+
+        return mav;
     }
 
 

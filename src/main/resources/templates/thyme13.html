@@ -7,15 +7,40 @@
 <body>
 
 <form action="/thymeleaf13" method="post" >
-    <h1 th:text="${msg}">어떤 메일을 사용하시나?</h1>
+    <h1 th:text="${msg}">msg 없음</h1>
     <br>
-    <input type="checkbox" name ="email" value = "gmail" th:checked="false"> 지메일
-    <input type="checkbox" name ="email" value = "kakao" th:checked="false"> 카카오
-    <input type="checkbox" name ="email" value = "naver" th:checked="false"> 네이버
-    <input type="checkbox" name ="email" value = "han" th:checked="false"> 한메일
+    <th:block th:if="${#strings.isEmpty(emailList)}!= true ">
+        <input type="checkbox" name ="email" value = "gmail" th:checked="${#strings.contains(emailList, 'gmail')}"> 지메일
+    </th:block>
+    <th:block th:unless="${#strings.isEmpty(emailList)}!= true ">
+        <input type="checkbox" name ="email" value = "gmail" th:checked="false"> 지메일
+    </th:block>
+    <input type="checkbox" name ="email" value = "kakao" th:if="${#strings.isEmpty(emailList)}!= true"
+           th:checked="${#strings.contains(emailList, 'kakao')}">
+    <input type="checkbox" name ="email" value = "kakao" th:unless="${#strings.isEmpty(emailList)}!= true" th:checked="false"> 카카오
+
+    <input type="checkbox" name ="email" value = "naver" th:if="${#strings.isEmpty(emailList)}!= true"
+           th:checked="${#strings.contains(emailList, 'naver')}">
+    <input type="checkbox" name ="email" value = "naver" th:unless="${#strings.isEmpty(emailList)}!= true" th:checked="false"> 네이버
+
+    <input type="checkbox" name ="email" value = "han" th:if="${#strings.isEmpty(emailList)}!= true"
+           th:checked="${#strings.contains(emailList, 'han')}">
+    <input type="checkbox" name ="email" value = "han" th:unless="${#strings.isEmpty(emailList)}!= true" th:checked="false"> 한메일
     <br>
     <input type="submit" value = "send">
 </form>
 <h1 th:text="${emailList}">이메일리스트가 출력됩니다</h1>
+<table border=1>
+    <tr>
+        <td>인덱스</td>
+        <td>메일</td>
+    </tr>
+    <tr th:each="emailItem, idx : ${emailList}">
+        <td th:text="${idx.index+1}"></td>
+        <td th:text="${emailItem}"></td>
+    </tr>
+
+</table>
+
 </body>
 </html>

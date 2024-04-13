@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>multi form</title>
+</head>
+<body>
+<h1>Diverse Form Page</h1>
+
+<h3 th:text="${msg}"></h3>
+<h3 th:text="'emailLst 비었나요?' +  ${#strings.isEmpty(emailList)}">
+    변수 비어있는지 확인
+</h3>
+<!--GET-->
+<form action = "" method="post">
+
+    <th:block th:if="${#strings.isEmpty(checkItems)} == true">
+        <table>
+            <tr>
+                <td>이메일</td>
+                <td><input type="checkbox" name="email" value="gmail" th:checked="false">gmail</td>
+                <td><input type="checkbox" name="email" value="kakao" th:checked="false">kakao</td>
+                <td><input type="checkbox" name="email" value="hanmail" th:checked="false">hanmail</td>
+                <td><input type="checkbox" name="email" value="naver" th:checked="false">naver</td>
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td><input type="radio" name="gender" value="male">Male</td>
+                <td><input type="radio" name="gender" value="female">Female</td>
+            </tr>
+            <tr>
+                <td>연령대</td>
+                <td>
+                    <select name ="age" size="3">
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40" selected>40</option>
+                        <option value="50">50</option>
+                        <option value="60">60</option>
+
+
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" value="send">
+    </th:block>
+
+    <!--POST, 폼값 controller에서 받아어 넣기-->
+    <th:block th:if="${#strings.isEmpty(checkItems)} != true">
+        <table>
+            <tr>
+                <td>이메일</td>
+                <td th:with ="isEmail = ${emailList} != null"
+                    th:each=" checkItem : ${checkItems}">
+                    <input type="checkbox" name="email" th:value = "${checkItem}"
+                           th:checked="${isEmail and (#strings.contains(emailList, checkItem))}">
+                    <th:block th:text="${checkItem}"></th:block>
+                </td>
+
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td><input type="radio" name="gender" value="male" th:checked="${gender} == 'male'">Male</td>
+                <td><input type="radio" name="gender" value="female" th:checked="${gender} == 'female'">Female</td>
+            </tr>
+            <tr>
+                <td>연령대</td>
+                <td>
+                    <select name ="age" size="3">
+                        <option value="20" th:selected="${age} == '20'">20</option>
+                        <option value="30" th:selected="${age} == '30'">30</option>
+                        <option value="40" th:selected="${age} == '40'">40</option>
+                        <option value="50" th:selected="${age} == '50'">50</option>
+                        <option value="60" th:selected="${age} == '60'">60</option>
+
+
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="send">
+    </th:block>
+
+
+
+</form>
+</body>
+</html>
